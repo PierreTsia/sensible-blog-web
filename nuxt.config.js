@@ -1,4 +1,4 @@
-export const strapiBaseUri = process.env.API_URL || 'http://localhost:1337'
+export const strapiBaseUri = process.env.API_URL
 
 export default {
   // Target: https://go.nuxtjs.dev/config-target
@@ -40,6 +40,7 @@ export default {
     '@nuxtjs/tailwindcss',
     '@nuxtjs/composition-api/module',
     '@nuxtjs/fontawesome',
+    '@nuxtjs/dotenv',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
