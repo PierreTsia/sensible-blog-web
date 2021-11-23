@@ -12,17 +12,26 @@
     "test": "jest"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.36",
+    "@fortawesome/free-regular-svg-icons": "^5.15.4",
     "@nuxtjs/composition-api": "^0.30.0",
+    "@nuxtjs/markdownit": "^2.0.0",
     "@nuxtjs/strapi": "^0.3.4",
     "core-js": "^3.15.1",
+    "date-fns": "^2.26.0",
     "nuxt": "^2.15.7"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.14.7",
+    "@fortawesome/free-brands-svg-icons": "^5.15.4",
+    "@fortawesome/free-solid-svg-icons": "^5.15.4",
+    "@iconify/icons-file-icons": "^1.1.7",
+    "@iconify/vue2": "^1.1.1",
     "@nuxt/types": "^2.15.7",
     "@nuxt/typescript-build": "^2.1.0",
     "@nuxtjs/eslint-config-typescript": "^6.0.1",
     "@nuxtjs/eslint-module": "^3.0.2",
+    "@nuxtjs/fontawesome": "^1.1.2",
     "@nuxtjs/tailwindcss": "^4.2.0",
     "@vue/test-utils": "^1.2.1",
     "babel-core": "7.0.0-bridge.0",

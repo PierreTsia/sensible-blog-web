@@ -1,4 +1,4 @@
-const strapiBaseUri = process.env.API_URL || 'http://localhost:1337'
+export const strapiBaseUri = process.env.API_URL || 'http://localhost:1337'
 
 export default {
   // Target: https://go.nuxtjs.dev/config-target
@@ -20,10 +20,14 @@ export default {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [],
+  css: ['@fortawesome/fontawesome-svg-core/styles.css'],
+
+  purgeCSS: {
+    whitelistPatterns: [/svg.*/, /fa.*/],
+  },
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: [{ src: '~/plugins/font-awesome.ts', ssr: false }],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -35,10 +39,17 @@ export default {
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
     '@nuxtjs/composition-api/module',
+    '@nuxtjs/fontawesome',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ['@nuxtjs/strapi'],
+  modules: ['@nuxtjs/strapi', '@nuxtjs/markdownit'],
+  markdownit: {
+    runtime: true,
+    preset: 'default',
+    linkify: true,
+    breaks: true,
+  },
   strapi: {
     url: strapiBaseUri,
     entities: [
