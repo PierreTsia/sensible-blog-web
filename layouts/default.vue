@@ -10,9 +10,9 @@ export default defineComponent({
 })
 </script>
 <template>
-  <div class="bg-gray-100 min-h-screen flex flex-col">
+  <div class="bg-gray-200 min-h-screen">
     <!--    <Navbar />-->
-    <main class="flex-1">
+    <main class="">
       <Nuxt />
     </main>
     <Footer />
