@@ -1,5 +1,10 @@
 <script lang="ts">
-import { defineComponent, useContext, useAsync } from '@nuxtjs/composition-api'
+import {
+  defineComponent,
+  useContext,
+  ref,
+  onBeforeMount,
+} from '@nuxtjs/composition-api'
 import ArticleCard from '~/components/ArticleCard.vue'
 import Header from '~/components/Header.vue'
 import HomeNav from '~/components/HomeNav.vue'
@@ -16,7 +21,7 @@ export default defineComponent({
   setup() {
     const { $strapi } = useContext()
 
-    const articles = useAsync(() => $strapi.find('articles'))
+    const articles = ref([]) //useAsync(() => $strapi.find('articles'))
 
     const colSize = (index: number) => {
       switch (index) {
@@ -32,6 +37,10 @@ export default defineComponent({
           return 'md:col-span-6'
       }
     }
+    onBeforeMount(async () => {
+      articles.value = await $strapi.find('articles')
+    })
+
     return { articles, colSize }
   },
 })
@@ -69,7 +78,7 @@ export default defineComponent({
               :class="colSize(i)"
             >
               <nuxt-link :to="{ path: `articles/${article.id}` }">
-                <ArticleCard :article="article"  />
+                <ArticleCard :article="article" />
               </nuxt-link>
             </div>
           </div>

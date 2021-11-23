@@ -5,6 +5,9 @@ import {
   useRoute,
   useAsync,
   computed,
+  ref,
+  Ref,
+  onBeforeMount,
 } from '@nuxtjs/composition-api'
 
 import format from 'date-fns/format'
@@ -19,9 +22,11 @@ export default defineComponent({
     const { $strapi } = useContext()
     const route = useRoute()
 
-    const article = useAsync(() =>
-      $strapi.findOne('articles', route.value.params.id)
-    )
+    onBeforeMount(async () => {
+      article.value = await $strapi.findOne('articles', route.value.params.id)
+    })
+
+    const article: Ref<any> = ref(null)
 
     const creationDate = computed(() =>
       article.value?.created_at
