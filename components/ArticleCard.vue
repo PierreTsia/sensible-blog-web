@@ -2,7 +2,6 @@
 import { computed, defineComponent } from '@nuxtjs/composition-api'
 import format from 'date-fns/format'
 import { fr } from 'date-fns/locale'
-import { strapiBaseUri } from '~/nuxt.config'
 
 export default defineComponent({
   name: 'ArticleCard',
@@ -22,7 +21,7 @@ export default defineComponent({
 
     const bgImage = computed(
       () =>
-        ` ${strapiBaseUri}${props?.article?.coverImg?.url}` ||
+        `${props?.article?.coverImg?.url}` ||
         'https://source.unsplash.com/random'
     )
 

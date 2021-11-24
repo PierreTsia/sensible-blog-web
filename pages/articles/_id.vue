@@ -5,15 +5,10 @@ import {
   useRoute,
   useAsync,
   computed,
-  ref,
-  Ref,
-  onBeforeMount,
 } from '@nuxtjs/composition-api'
 
 import format from 'date-fns/format'
 import { fr } from 'date-fns/locale'
-
-import { strapiBaseUri } from '~/nuxt.config'
 
 export default defineComponent({
   name: 'article-page',
@@ -22,11 +17,9 @@ export default defineComponent({
     const { $strapi } = useContext()
     const route = useRoute()
 
-    onBeforeMount(async () => {
-      article.value = await $strapi.findOne('articles', route.value.params.id)
-    })
-
-    const article: Ref<any> = ref(null)
+    const article = useAsync(() =>
+      $strapi.findOne('articles', route.value.params.id)
+    )
 
     const creationDate = computed(() =>
       article.value?.created_at
@@ -36,7 +29,7 @@ export default defineComponent({
 
     const bgImage = computed(
       () =>
-        ` ${strapiBaseUri}${article.value?.coverImg?.url}` ||
+        `${article.value?.coverImg?.url}` ||
         'https://source.unsplash.com/random'
     )
 
