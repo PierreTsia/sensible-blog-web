@@ -1,6 +1,5 @@
 <script lang="ts">
 import { computed, defineComponent } from '@nuxtjs/composition-api'
-import { strapiBaseUri } from '~/nuxt.config'
 
 export default defineComponent({
   name: 'Header',
