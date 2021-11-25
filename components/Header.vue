@@ -20,7 +20,7 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const coverUrl = computed(() => `${strapiBaseUri}${props.cover}`)
+    const coverUrl = computed(() => `${props.cover}`)
 
     return {
       coverUrl,
