@@ -1,9 +1,31 @@
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
+import { computed, defineComponent } from '@nuxtjs/composition-api'
+import { strapiBaseUri } from '~/nuxt.config'
 
 export default defineComponent({
   name: 'Header',
   components: {},
+  props: {
+    cover: {
+      type: String,
+      default: 'https://picsum.photos/id/237/200/300',
+    },
+    title: {
+      type: String,
+      default: 'Nuxt.js',
+    },
+    subtitle: {
+      type: String,
+      default: 'A Nuxt.js project',
+    },
+  },
+  setup(props) {
+    const coverUrl = computed(() => `${strapiBaseUri}${props.cover}`)
+
+    return {
+      coverUrl,
+    }
+  },
 })
 </script>
 <template>
@@ -12,7 +34,7 @@ export default defineComponent({
     <div
       class="w-full m-0 p-0 bg-cover bg-bottom"
       :style="{
-        'background-image': `url(${require('@/static/cover.jpg')})`,
+        'background-image': `url('${coverUrl}')`,
       }"
       style="height: 80vh; max-height: 460px"
     >
@@ -29,9 +51,9 @@ export default defineComponent({
       >
         <!--Title-->
         <p class="text-white font-extrabold text-3xl md:text-5xl">
-          👻 Sensible Blog
+          {{ title }}
         </p>
-        <p class="text-xl md:text-2xl text-gray-500">Welcome to my Blog</p>
+        <p class="text-xl md:text-2xl text-gray-500">{{ subtitle }}</p>
       </div>
     </div>
 

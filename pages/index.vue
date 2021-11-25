@@ -2,8 +2,8 @@
 import {
   defineComponent,
   useContext,
-  ref,
-  onBeforeMount,
+  useAsync,
+  computed,
 } from '@nuxtjs/composition-api'
 import ArticleCard from '~/components/ArticleCard.vue'
 import Header from '~/components/Header.vue'
@@ -21,7 +21,12 @@ export default defineComponent({
   setup() {
     const { $strapi } = useContext()
 
-    const articles = ref([]) //useAsync(() => $strapi.find('articles'))
+    const articles = useAsync(() => $strapi.find('articles'))
+    const home = useAsync(() => $strapi.find('home-page'))
+
+    const coverUrl = computed(() => home.value?.hero_cover?.[0]?.url ?? '')
+    const title = computed(() => home.value?.hero_title ?? '')
+    const subtitle = computed(() => home.value?.hero_subtitle ?? '')
 
     const colSize = (index: number) => {
       switch (index) {
@@ -37,18 +42,15 @@ export default defineComponent({
           return 'md:col-span-6'
       }
     }
-    onBeforeMount(async () => {
-      articles.value = await $strapi.find('articles')
-    })
 
-    return { articles, colSize }
+    return { articles, colSize, coverUrl, title, subtitle }
   },
 })
 </script>
 
 <template>
   <div class="">
-    <Header />
+    <Header :cover="coverUrl" :title="title" :subtitle="subtitle" />
     <div class="container px-4 md:px-0 max-w-6xl mx-auto -mt-32">
       <div class="mx-0 sm:mx-6">
         <!--Nav-->

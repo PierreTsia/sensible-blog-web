@@ -1,4 +1,4 @@
-export const strapiBaseUri = "https://sensible-blog-api.herokuapp.com"
+export const strapiBaseUri = process.env.API_URL
 
 export default {
   // Target: https://go.nuxtjs.dev/config-target
@@ -52,10 +52,11 @@ export default {
     breaks: true,
   },
   strapi: {
-    url: "https://sensible-blog-api.herokuapp.com/",
+    url: strapiBaseUri,
     entities: [
       { name: 'articles', type: 'collection' },
       { name: 'authors', type: 'collection' },
+      { name: 'home-page', type: 'single' },
     ],
   },
 
