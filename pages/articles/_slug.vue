@@ -11,14 +11,16 @@ import format from 'date-fns/format'
 import { fr } from 'date-fns/locale'
 
 export default defineComponent({
-  name: 'article-page',
+  name: 'ArticlePage',
   layout: 'article',
   setup() {
     const { $strapi } = useContext()
     const route = useRoute()
 
     const article = useAsync(() =>
-      $strapi.findOne('articles', route.value.params.id)
+      $strapi
+        .find('articles', { slug: route.value.params.slug })
+        .then((data) => data[0])
     )
 
     const creationDate = computed(() =>

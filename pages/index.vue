@@ -68,7 +68,7 @@ export default defineComponent({
             rounded-t
           "
         >
-          <nuxt-link :to="{ path: `articles/${articles[0].id}` }">
+          <nuxt-link :to="{ path: `articles/${articles[0].slug}` }">
             <FeaturedArticle :article="articles[0]" />
           </nuxt-link>
 
@@ -79,7 +79,7 @@ export default defineComponent({
               class="col-span-12"
               :class="colSize(i)"
             >
-              <nuxt-link :to="{ path: `articles/${article.id}` }">
+              <nuxt-link :to="{ path: `articles/${article.slug}` }">
                 <ArticleCard :article="article" />
               </nuxt-link>
             </div>
